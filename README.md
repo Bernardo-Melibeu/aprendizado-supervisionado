@@ -28,8 +28,7 @@ Ela possui uma variável denominada "quality", uma nota de 0 a 10 que denota a q
 3) Descreva as variáveis presentes na base. Quais são as variáveis? Quais são os tipos de variáveis (discreta, categórica, contínua)? Quais são as médias e desvios padrões?
 As variaveis são:
 
-As variáveis da base descrevem caracteristicas da composição do vinho. De catégorica temos somente a variavel "tipo", de discreta "qualidade", e o resto é contínua. Médias e desvios padrões estão na seção "Média e desvio padrão"
-do arquivo "pt1.ipynb".
+As variáveis da base descrevem caracteristicas da composição do vinho. De catégorica temos somente a variavel "tipo", de discreta "qualidade", e o resto é contínua. Médias e desvios padrões estão na seção "Média e desvio padrão" do arquivo "pt1.ipynb".
 
 
 
@@ -60,7 +59,8 @@ i. a média e desvio da acurácia dos modelos obtidos;
 ii. a média e desvio da precisão dos modelos obtidos;
 iii. a média e desvio da recall dos modelos obtidos;
 iv. a média e desvio do f1-score dos modelos obtidos.
-[FEITO]
+
+feito no arquivo "pt2.ipynb"
 
 
 
@@ -69,7 +69,9 @@ i. a média e desvio da acurácia dos modelos obtidos;
 ii. a média e desvio da precisão dos modelos obtidos;
 iii. a média e desvio da recall dos modelos obtidos;
 iv. a média e desvio do f1-score dos modelos obtidos.
-[FEITO]
+
+feito no arquivo "pt2.ipynb"
+
 
 
 5) Em relação à questão anterior, qual o modelo deveria ser escolhido para uma eventual operação. Responda essa questão mostrando a comparação de todos os modelos,
@@ -82,7 +84,7 @@ Considerando o uso do programa para apontar vinhos de alta qualidade, eu usaria 
 para saber quantos vinhos são bons ou ruins. Utilize o mesmo critério utilizado com os vinhos brancos, para comparar o desempenho do modelo. Ele funciona da mesma forma para essa nova base? Justifique.
 
 
-Não. Os criterios para um vinho branco bom são diferentes do que os de um tinto, o que resulta num classificador ineficiente.
+Não. Os criterios para um vinho branco bom são diferentes do que os de um tinto, o que resulta num classificador ineficiente. Feito no arquivo "pt2.ipynb"
 
 
 
