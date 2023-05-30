@@ -50,8 +50,8 @@ i. a média e desvio da acurácia dos modelos obtidos;
 ii. a média e desvio da precisão dos modelos obtidos;
 iii. a média e desvio da recall dos modelos obtidos;
 iv. a média e desvio do f1-score dos modelos obtidos.
-[FEITO]
 
+feito no arquivo "pt2.ipynb"
 
 
 
