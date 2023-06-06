@@ -5,17 +5,16 @@ from sklearn.metrics import (
     accuracy_score,
     precision_score,
     recall_score,
-    f1_score,confusion_matrix,roc_curve,RocCurveDisplay,auc)
-import seaborn as sns
+    f1_score,confusion_matrix,roc_curve,auc)
 import matplotlib.pyplot as plt
 VARS=["fixed acidity","volatile acidity","residual sugar","total sulfur dioxide","density","alcohol"]
+
 
 def faz_logreg(x,y,model):
     model.fit(X=x,y=y)
     y_prob=model.predict_proba(x)
     y_pred=model.predict(x)
     return y_prob,y_pred,model
-
 
 
 def faz_opinion(df):
@@ -37,12 +36,10 @@ def escala_dados(x,x_test,scaler=StandardScaler()):
     return x_scaled,x_test_scaled,scaler
 
 
-
 def prep_logreg(df,random_state=42,stratify=None,vars=VARS,y_name="opinion"):
     x_train,x_test,y_train,y_test=train_test_split(df[vars],df[y_name],test_size=0.2,random_state=random_state,stratify=stratify)
     x_train_scaled,x_test_scaled,_=escala_dados(x_train,x_test)
     return x_train_scaled,x_test_scaled,y_train,y_test
-
 
 
 def prep_folds(df,random_state=42,vars=VARS,y_name="opinion"):
@@ -58,7 +55,6 @@ def faz_prompt_media(f1,acc,precision,recall):
     print(f"Meu resultado de precisão Médio é: {np.mean(precision):.2} +- {np.std(precision): .2}")
     print(f"Meu resultado de recall   Médio é: {np.mean(recall):.2} +- {np.std(recall): .2}")
     print(f"Meu resultado de F1-Score Médio é: {np.mean(f1):.2} +- {np.std(f1): .2}")
-
 
 
 def folding_time(x_train_white_cv,y_train_white_cv,model):
@@ -93,10 +89,26 @@ def aplica_teste(x_train_white_cv,y_train_white_cv,x_test_white,y_test_white,mod
     y_pred_test_white=model.predict(x_test_white)
     print("--------TESTE---------------")
     faz_prompt(y_test_white,y_pred_test_white)
+    curva_roc(y_test_white,y_pred_test_white)
 
 
 def faz_tudo(model,df_white):
     x_train_white_cv,x_test_white,y_train_white_cv,y_test_white=prep_folds(df_white)
-    best_layer,tree,scale,y_prob_white,y_pred_white=folding_time(x_train_white_cv,y_train_white_cv,model)
+    best_layer,tree,scale,_,_=folding_time(x_train_white_cv,y_train_white_cv,model)
     aplica_teste(x_train_white_cv,y_train_white_cv,x_test_white,y_test_white,tree[best_layer])
     return best_layer,tree,scale  
+
+
+def curva_roc(y_test_white,y_pred_test_white):
+    fpr, tpr, _ = roc_curve(y_test_white, y_pred_test_white)
+    roc_auc = auc(fpr, tpr)
+    plt.figure(figsize=(10, 6))
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label='ROC curve (area = %0.2f)' % roc_auc)
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.0])
+    plt.xlabel('Falsos Positivos')
+    plt.ylabel('Verdadeiros Positivos')
+    plt.title('ROC- Melhor Camada')
+    plt.legend(loc="lower right")
+    plt.show()
